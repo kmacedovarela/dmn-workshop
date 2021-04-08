@@ -1,0 +1,10 @@
+config:
+    renderer: markdown
+
+modules:
+  introduction:
+    name: Introduction
+  getting-started:
+    name: 1. Getting Started with DMN
+
+

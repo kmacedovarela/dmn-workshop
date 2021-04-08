@@ -1,0 +1,12 @@
+---
+id: "dmn_workshop"
+name: "Getting Started with DMN Workshop"
+
+content:
+  url: https://raw.githubusercontent.com/kmacedovarela/pam-dmn-workshop.git/master
+
+modules:
+  activate:
+  - introduction
+  - getting-started
+
