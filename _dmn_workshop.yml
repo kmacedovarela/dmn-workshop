@@ -9,4 +9,9 @@ modules:
   activate:
   - introduction
   - getting-started
-
+  - intermediate-lab-intro
+  - intermediate-lab-authoring
+  - intermediate-lab-deployment
+  - advanced-lab-intro
+  - advanced-lab-authoring
+  - advanced-lab-deployment

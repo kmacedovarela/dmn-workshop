@@ -1,16 +1,14 @@
 # 1. Getting Started with Decision Model and Notation
 
-This lab introduces you to the deployment an existing Decision Model and Notation (DMN) and validation of it's decisions.
+This lab introduces you to the deployment of an existing Decision Model and Notation (DMN) and validation of it's decisions.
 
 -   Explore an existing DMN file created using Business Central
 -   Deploy the existing DMN project to Decision Server
 -   Test the deployed DMN
 
-
-
 Prerequisite
 
--   PAM or DM 7.10+ up and running
+-   PAM or DM 7.3+ up and running
 
 ## 1.1 Examine Existing DMN Diagram
 
@@ -18,7 +16,7 @@ The following example describes an *insurance* price calculator based on an appl
 
 **DMN Decision Table**
 
-![]({% image_path insurance-price-dt.png %})
+![]({%  image_path insurance-price-dt.png %})
 
 -   The decision table was designed without using Decision Central tools, but could be imported seemlesly due to the conformity with DMN specification.
 
@@ -30,7 +28,7 @@ The following example describes an *insurance* price calculator based on an appl
 
 The *decision* can also be represented by the following decision requirements diagram:
 
-![]({% image_path insurance-price-drd.png %})
+![]({%  image_path insurance-price-drd.png %})
 
 -   In this decision requirements diagram, note that the applicant’s age and accident history are the required inputs for the decision table "Insurance Total Price".
 
@@ -44,7 +42,7 @@ In this section, you download the GitHub repository to an accessible directory i
 
 2.  From the GitHub web page, click **Clone or download** on the right and then select **Download ZIP**:
 
-    ![]({% image_path github-download-zip.png %})
+    ![]({%  image_path github-download-zip.png %})
 
 3.  Using your favorite file system navigation tool, locate the downloaded ZIP file and unzip it to a directory in your file system.
 
@@ -60,11 +58,11 @@ In this section, you download the GitHub repository to an accessible directory i
 
 3.  In the empty project library view for the `policy-price` project, click **Import Asset**.
 
-    ![]({% image_path policy-price-importing-items.png %})
+    ![]({%  image_path policy-price-importing-items.png %})
 
 4.  In the **Create new Uploaded file** dialog, enter `insurance-pricing.dmn` in the **Uploaded file** field:
 
-    ![]({% image_path insurance-pricing-dmn-name.png %})
+    ![]({%  image_path insurance-pricing-dmn-name.png %})
 
 5.  Using the browse button at the far right of the field labeled **Please select a file to upload**, navigate with the file browser to the `$PROJECT_HOME` directory where the unzipped Git repository is located.
 
@@ -74,13 +72,13 @@ In this section, you download the GitHub repository to an accessible directory i
 
 8.  The diagram will open and you will be able to see the DRD. Explore the diagram nodes to check the decision policies of this diagram. 
 
-    ![]({% image_path insurance-pricing-drd-added.png %})
+    ![]({%  image_path insurance-pricing-drd-added.png %})
 
 9.  Close the diagram. You should now be on the library view for the `policy-price` project.
 
 10. You should see the `insurance-pricing` asset is added to your project assets:
 
-    ![]({% image_path insurance-pricing-dmn-added.png %})
+    ![]({%  image_path insurance-pricing-dmn-added.png %})
 
 11. From the `policy-price` project’s library view, click **Build**, then **Deploy** to deploy the project to the execution server.
 
@@ -88,7 +86,7 @@ In this section, you download the GitHub repository to an accessible directory i
 
 13. Verify that `policy-price_1.0.0` shows a *green* status:
 
-    ![]({% image_path policy-price-container.png %})
+    ![]({%  image_path policy-price-container.png %})
 
 ## 1.4 Testing the Decision Service
 
@@ -96,11 +94,11 @@ In this section, you test the DMN solution using the REST endpoints available in
 
 1.  Open your Decision Server (a.k.a KIE Server) on the url "/docs". You should see something like this:
 
-    ![]({% image_path kie-server-swagger-ui.png %})
+    ![]({%  image_path kie-server-swagger-ui.png %})
 
 2. Next, under `DMN Models`, click on the `POST /server/containers/{containerId}/dmn"` and select "Try it out": 
 
-   ![]({% image_path kie-server-try-it-out.png %})
+   ![]({%  image_path kie-server-try-it-out.png %})
 
 3. Now use the following data:
 
@@ -108,14 +106,14 @@ In this section, you test the DMN solution using the REST endpoints available in
    * Body (dmn context): `{"dmn-context": {"Age": 20, "had previous incidents": false}}`
    * Parameter content type: `application/json`
 
-   ![]({% image_path kie-server-post-data.png %})
+   ![]({%  image_path kie-server-post-data.png %})
 
 4. Click on the **execute** button. You should see the server response `200` and the results of the decision.
 
-    ![]({% image_path kie-server-dmn-result.png %})
+    ![]({%  image_path kie-server-dmn-result.png %})
 
 1. Try out the Decision with different values for the age and accident history, and compare the results with the decision table:
 
-   ![]({% image_path insurance-price-dt.png %})
+   ![]({%  image_path insurance-price-dt.png %})
 
 

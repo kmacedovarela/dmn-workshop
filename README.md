@@ -18,7 +18,6 @@ Prerequisite
 You'll find the instructions at this [detailed instructions](Loan_Provision.adoc).
 
 
-
 ## Instructions
 
 You can find the labs in a single doc within the ".adoc" file, or you can check them at: https://red.ht/workshop-pam-fuse
