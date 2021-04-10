@@ -13,8 +13,8 @@ modules:
   intermediate-lab-deployment:
     name: Vacation Days - Consuming Decisions
   advanced-lab-intro:
-    name: Call Center - Use case and new project
+    name: Call Centre - Use case and new project
   advanced-lab-authoring:
-    name: Call Center - Authoring Decisions 
+    name: Call Centre - Authoring Decisions 
   advanced-lab-deployment:
-    name: Call Center - Consuming Decisions
+    name: Call Centre - Consuming Decisions

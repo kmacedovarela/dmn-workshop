@@ -37,25 +37,24 @@ To define and deploy a DMN decision model, we first need to create a new project
 
 3.  Click on **Design** to navigate to the Design perspective.
 
-    ![]({% image_path business-central-design.png %})
+    ![]({% image_path business-central-design.png %}){:width="600px"}
 4.  In the Design perspective, create a new project. If your space is empty, this can be done by clicking on the blue **Add Project** button in the center of the page. If you already have projects in your space, you can click on the blue **Add Project** icon at the top right of the page.
 
 2.  Give the project the name `vacation-days-decisions`, and the description "Vacation Days Decisions".
 
-    ![]({% image_path add-project-vacation-days-decisions.png %})
+    ![]({% image_path add-project-vacation-days-decisions.png %}){:width="600px"}
 
 1.  With the project created, we can now create our DMN model. Click on the blue **Add Asset** button.
 
 2.  In the **Add Asset** page, select **Decision** in the dropdown filter selector.
 
-    ![]({% image_path new-asset-decisions-filter.png %})
+    ![]({% image_path new-asset-decisions-filter.png %}){:width="600px"}
 
 1.  Click on the **DMN** tile to create a new DMN model. Give it the name `vacation-days`. This will create the asset and open the DMN editor.
 
-    ![]({% image_path add-dmn-vacation-days.png %})
+    ![]({% image_path add-dmn-vacation-days.png %}){:width="600px"}
 
-Solution
-========
+## Next Steps
 
 You can do this lab in 2 ways:
 
