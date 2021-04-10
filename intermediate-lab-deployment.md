@@ -38,7 +38,103 @@ Next, we will evaluate our model with some input data. We need to provide our mo
 
 5. Test the service with a number of other values. See the following table for some sample values and expected output.
 
-<table><colgroup><col style="width: 33%" /><col style="width: 33%" /><col style="width: 33%" /></colgroup><tbody><tr class="odd"><td><p>Age</p></td><td><p>Years of Service</p></td><td><p>Total Vacation Days</p></td></tr><tr class="even"><td><p>16</p></td><td><p>1</p></td><td><p>27</p></td></tr><tr class="odd"><td><p>25</p></td><td><p>5</p></td><td><p>22</p></td></tr><tr class="even"><td><p>44</p></td><td><p>20</p></td><td><p>24</p></td></tr><tr class="odd"><td><p>44</p></td><td><p>30</p></td><td><p>30</p></td></tr><tr class="even"><td><p>50</p></td><td><p>20</p></td><td><p>24</p></td></tr><tr class="odd"><td><p>50</p></td><td><p>30</p></td><td><p>30</p></td></tr><tr class="even"><td><p>60</p></td><td><p>20</p></td><td><p>30</p></td></tr></tbody></table>
+  <table>
+    <colgroup>
+      <col style="width: 33%" />
+      <col style="width: 33%" />
+      <col style="width: 33%" />
+    </colgroup>
+    <tbody>
+      <tr class="odd">
+        <td>
+          <p>Age</p>
+        </td>
+        <td>
+          <p>Years of Service</p>
+        </td>
+        <td>
+          <p>Total Vacation Days</p>
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <p>16</p>
+        </td>
+        <td>
+          <p>1</p>
+        </td>
+        <td>
+          <p>27</p>
+        </td>
+      </tr>
+      <tr class="odd">
+        <td>
+          <p>25</p>
+        </td>
+        <td>
+          <p>5</p>
+        </td>
+        <td>
+          <p>22</p>
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <p>44</p>
+        </td>
+        <td>
+          <p>20</p>
+        </td>
+        <td>
+          <p>24</p>
+        </td>
+      </tr>
+      <tr class="odd">
+        <td>
+          <p>44</p>
+        </td>
+        <td>
+          <p>30</p>
+        </td>
+        <td>
+          <p>30</p>
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <p>50</p>
+        </td>
+        <td>
+          <p>20</p>
+        </td>
+        <td>
+          <p>24</p>
+        </td>
+      </tr>
+      <tr class="odd">
+        <td>
+          <p>50</p>
+        </td>
+        <td>
+          <p>30</p>
+        </td>
+        <td>
+          <p>30</p>
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <p>60</p>
+        </td>
+        <td>
+          <p>20</p>
+        </td>
+        <td>
+          <p>30</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 ## Using the KIE-Server Client
 
@@ -67,7 +163,7 @@ In this section we will create a simple Java client for our DMN model.
 
 6. Before we implement our method, we first define a number of constants that we will need when implementing our method (note that the values of your constants can be different depending on your environment, model namespace, etc.): 
 
-   ~~~java
+   ~~~
      private static final String KIE_SERVER_URL = "http://localhost:8080/kie-server/services/rest/server"; 
      private static final String CONTAINER_ID = "vacation-days-decisions_1.0.0"; 
      private static final String USERNAME = "pamAdmin"; 
@@ -78,25 +174,25 @@ In this section we will create a simple Java client for our DMN model.
 
 7. KIE-Server client API classes can mostly be retrieved from the `KieServicesFactory` class. We first need to create a `KieServicesConfiguration` instance that will hold our credentials and defines how we want our client to communicate with the server: 
 
-   ~~~java
+   ~~~
    KieServicesConfiguration kieServicesConfig = KieServicesFactory.newRestConfiguration(KIE_SERVER_URL, new EnteredCredentialsProvider(USERNAME, PASSWORD)); 
    ~~~
 
 8. Next, we create the `KieServicesClient`: 
 
-   ~~~java
+   ~~~
    KieServicesClient kieServicesClient = KieServicesFactory.newKieServicesClient(kieServicesConfig); 
    ~~~
 
 9. From this client we retrieve our DMNServicesClient: 
 
-   ~~~java
+   ~~~
    DMNServicesClient dmnServicesClient = kieServicesClient.getServicesClient(DMNServicesClient.class); 
    ~~~
 
-10. To pass the input values to our model to the Execution Server, we need to create a `DMNContext`: \`\`\` 
+10. To pass the input values to our model to the Execution Server, we need to create a `DMNContext`: 
 
-    ~~~java
+    ~~~
     DMNContext dmnContext = dmnServicesClient.newContext();
     dmnContext.set("Age", 16); dmnContext.set("Years of Service", 1);
     ~~~
@@ -105,13 +201,13 @@ In this section we will create a simple Java client for our DMN model.
 
 11. We now have defined all the required instances needed to send a DMN evaluation request to the server: 
 
-    ~~~java
+    ~~~
     ServiceResponse<DMNResult> dmnResultResponse = dmnServicesClient.evaluateAll(CONTAINER_ID, DMN_MODEL_NAMESPACE, DMN_MODEL_NAME, dmnContext);
     ~~~
 
 12. Finally we can retrieve the DMN evaluation result and print it in the console:
 
-    ~~~java
+    ~~~
     DMNDecisionResult decisionResult = dmnResultResponse.getResult().getDecisionResultByName("Total Vacation Days"); System.out.println("Total vacation days: " + decisionResult.getResult()); 
     ~~~
 
@@ -119,6 +215,5 @@ In this section we will create a simple Java client for our DMN model.
 
 13. Compile your project and run it. Observe the output in the console, which should say: **Total vacation days: 27**
 
-    
 
 The complete project can be found here: <https://github.com/DuncanDoyle/vacation-days-dmn-lab-client>

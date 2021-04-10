@@ -68,13 +68,12 @@ Next, we will evaluate our model with some input data. We need to provide our mo
           } 
         } 
       } 
- 
+
     ~~~
     
     Click on **Execute**. The result value of the `Accept Call` should be `true`. Test the service with a number of other values. For example, specify a banned phone number like: +421 92000001
 
-Using the KIE-Server Client
-===========================
+### 8.2.2. Using the KIE-Server Client
 
 Red Hat Decision Manager provides a KIE-Server Client API that allows the user to interact with the KIE-Server from a Java client using a higher level API. It abstracts the data marshalling and unmarshalling and the creation and execution of the RESTful commands from the developer, allowing him/her to focus on developing business logic.
 
@@ -84,9 +83,13 @@ In this section we will create a simple Java client for our DMN model.
 
 2. Add the following dependency to your project:
 
-   ~~~
-xml 
-   <dependency> <groupId>org.kie.server</groupId> <artifactId>kie-server-client</artifactId> <version>7.18.0.Final</version> <scope>compile</scope> </dependency> 
+   ~~~ 
+    <dependency> 
+      <groupId>org.kie.server</groupId> 
+      <artifactId>kie-server-client</artifactId> 
+      <version>7.48.0.Final</version> 
+    <scope>compile</scope> 
+    </dependency> 
    ~~~
 
 3.  Create a Java package in your `src/main/java` folder with the name `org.kie.dmn.lab`.
@@ -97,8 +100,7 @@ xml
 
 6. Before we implement our method, we first define a number of constants that we will need when implementing our method (note that the values of your constants can be different depending on your environment, model namespace, etc.):
 
-   ~~~
-java 
+   ~~~ 
    private static final String KIE_SERVER_URL = "http://localhost:8080/kie-server/services/rest/server"; 
    private static final String CONTAINER_ID = "call-centre-decisions_1.0.0"; 
    private static final String USERNAME = "pamAdmin"; 
@@ -109,7 +111,6 @@ java
 7. KIE-Server client API classes can mostly be retrieved from the `KieServicesFactory` class. We first need to create a `KieServicesConfiguration` instance that will hold our credentials and defines how we want our client to communicate with the server:
 
    ~~~
-java
    KieServicesConfiguration kieServicesConfig = KieServicesFactory.newRestConfiguration(KIE_SERVER_URL, new
    EnteredCredentialsProvider(USERNAME, PASSWORD)); kieServicesConfig.setMarshallingFormat(MarshallingFormat.JSON);
    ~~~
@@ -117,28 +118,24 @@ java
 8. Next, we create the `KieServicesClient`:
 
    ~~~
-java
    KieServicesClient kieServicesClient = KieServicesFactory.newKieServicesClient(kieServicesConfig);
    ~~~
 
 9. From this client we retrieve our DMNServicesClient:
 
    ~~~
-java
    DMNServicesClient dmnServicesClient = kieServicesClient.getServicesClient(DMNServicesClient.class);
    ~~~
 
 10. To pass the input values to our model to the Execution Server, we need to create a `DMNContext`:
 
     ~~~
-java
     DMNContext dmnContext = dmnServicesClient.newContext(); 
     ~~~
 
 11. We pass the input variables to the `DMNContext`. We define the following three methods that create the data inputs:
 
     ~~~
-java
     private static Map<String, Object> getIncomingCall() { 
       Map<String, Object> incomingCall = new HashMap<>(); 
       Map<String, Object> phone = new HashMap<>(); 
@@ -166,20 +163,18 @@ java
 12. We can now add the data to the `DMNContext` as follows:
 
     ~~~
-java
     dmnContext.set("incoming call", getIncomingCall()); dmnContext.set("employees", getEmployees()); dmnContext.set("office", getOffice()); 
     ~~~
 
 13. We now have defined all the required instances needed to send a DMN evaluation request to the server. We explicitly specify which decision we want to evaluate, in this case the `Accept Call` decision, by using the `evaluateDecisionByName` of the `DMNServiceClient`.
 
-    ~~~java
+    ~~~
     ServiceResponse<DMNResult> dmnResultResponse = dmnServicesClient.evaluateDecisionByName(CONTAINER_ID, DMN_MODEL_NAMESPACE, DMN_MODEL_NAME, "Accept Call", dmnContext);
     ~~~
 
 14. Finally we can retrieve the DMN evaluation result and print it in the console:
 
     ~~~
-java
     DMNDecisionResult decisionResult = dmnResultResponse.getResult().getDecisionResultByName("Accept Call"); System.out.println("Is the call accepted?: " + decisionResult.getResult()); 
     ~~~
 
