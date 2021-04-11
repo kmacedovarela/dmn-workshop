@@ -5,15 +5,15 @@ modules:
   introduction:
     name: Introduction
   getting-started:
-    name: Getting Started with DMN and consuming via REST
+    name: Insurance Price - Getting Started
   intermediate-lab-intro:
-    name: Vacation Days - Use case and new project
+    name: Vacation Days - Introduction 
   intermediate-lab-authoring:
     name: Vacation Days - Authoring Decisions 
   intermediate-lab-deployment:
     name: Vacation Days - Consuming Decisions
   advanced-lab-intro:
-    name: Call Centre - Use case and new project
+    name: Call Centre - Introduction
   advanced-lab-authoring:
     name: Call Centre - Authoring Decisions 
   advanced-lab-deployment:

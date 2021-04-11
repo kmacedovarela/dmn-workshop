@@ -1,4 +1,4 @@
-## 7. Authoring the decisioning for the Call Center
+# 7. Authoring the decisioning for the Call Center
 
 The problem statement describes a number of different inputs to our decision:
 
@@ -10,7 +10,15 @@ The problem statement describes a number of different inputs to our decision:
 
 Furthermore, the problem statement describes that phone numbers could be banned. So, also **banned numbers** can be regarded as an input to our model (although we will not implement it as an input in this lab).
 
-With the given input, we need to make the following decision:
+With the given input, we need to make the following decisions: 
+
+-   **Accept Call**: the final decision we need to make is whether the given office will accept the call.
+- **Can Handle Call**: whether the office can actually accept the call. As defined in the problem statement, this depends on: 
+  - whether the phone number has been banned;
+  -  the purpose of the phone call (“help” or “objection”).
+
+
+## 7.1. Accept Call Decision Structure
 
 -   **Accept Call**: the final decision we need to make is whether the given office will accept the call.
 
@@ -56,7 +64,7 @@ With the given input, we need to make the following decision:
 
         ![Employee Type]({% image_path/employee-type.png %}){:width="800px"}
 
-## 7.1. Decision Service
+## 7.2. Decision Service
 
 With the main structure defined, we can now look at the requirements of the decision whether the office can actually accept the call. As defined in the problem statement, this depends on:
 
@@ -116,5 +124,15 @@ We will model this decision as a DMN **Decision Service** that can be called by 
 
     ![Decision Service Knowledge Requirement]({% image_path/decision-service-knowledge-requirement.png %}){:width="800px"}
 
+## 7.3. "Accept Call" Decision Logic
+
 11. Implement the `Accept Call` decision logic as follows. ![Accept Cal Decision]({% image_path/Accept-Call-decision.png %}){:width="800px"}
+
+Notice that the line 1 is the invocation of the decision service "Can Handle Call". This is an **Invocation** of the `Can Handle Call` service, passing the `incoming call` input as the variable `call`. The output of this invocation will be the `boolean` variable `Call can be handled`. 
+
+The `Call can be handled` variable as then used to validate the decision result in the last line.
+
+## Next steps
+
+We're done. Next, we should deploy the project in KIE Server and test the model using the REST and Java API.
 

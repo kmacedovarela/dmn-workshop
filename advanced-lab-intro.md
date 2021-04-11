@@ -1,4 +1,4 @@
-# Call Centre - Intro and Use Case
+# 6. Call Centre - Intro and Use Case
 
 This is an advanced Decision Model & Notation lab that introduces DMN Decision Services, Relations, nested boxed expressions, etc. It also explores a number of different FEEL constructs and expressions like, for example, `list contains`.
 
@@ -6,10 +6,6 @@ This is an advanced Decision Model & Notation lab that introduces DMN Decision S
 
 -   Implement a DMN model using the Red Hat DM/PAM DMN editor
 -   Deploy the existing DMN project to Decision Server
-
-## Pre reqs
-
--   An existing, accessible, DM/PAM 7.3+ environment.
 
 ## Problem Statement
 
@@ -21,7 +17,7 @@ In this lab we will create a decision that determines if a call-centre can take 
 
 Whether the office can accepts a call depends on: *whether the phone number has been banned.* the purpose of the phone call ("help" or "objection").
 
-## Create a Decision Project
+## 6.1. Create a Decision Project
 
 To define and deploy a DMN decision model, we first need to create a new project in which we can store the model. To create a new project:
 

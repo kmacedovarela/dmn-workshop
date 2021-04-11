@@ -1,8 +1,8 @@
-# Vacation Days - Authoring Decisions
+# 4. Vacation Days - Authoring Decisions
 
-Now, let's create our decision model.
+Let's work on the decision model.
 
-## Input Nodes
+## 4.1. Input Nodes
 
 The problem statement describes a number of different inputs to our decision:
 
@@ -26,7 +26,7 @@ Therefore, we should create two input nodes, one for each input:
 
 1.  Save the model.
 
-## Constants
+## 4.2. Constants
 
 The problem statement describes that every employee receives at least 22 days. So, if no other decisions apply, an employee receives 22 days. This is can be seen as a constant input value into our decision model. In DMN we can model such constant inputs with a **Decision** node with a **Literal** boxed expression that defines the constant value:
 
@@ -52,7 +52,7 @@ The problem statement describes that every employee receives at least 22 days. S
 
 1.  Save the model.
 
-## Decisions
+## 4.3. Decisions
 
 The problem statement defines 3 decisions which can cause extra days to be given to employees based on various criteria. Let’s simply call these decision:
 
@@ -109,7 +109,7 @@ Although these decisions could be implemented in a single decision node, we’ve
         ![Decision Table Case 3]({% image_path decision-table-case-3.png %}){:width="600px"}
 
 
-## Total Vacation Days
+## 4.4. Total Vacation Days
 
 The total vacation days needs to be determined from the base vacation days and the decisions taken by our 3 decision nodes. As such, we need to create a new Decision node, which takes the output of our 4 Decision nodes (3 decision tables and a literal expression) as input and determines the final output. To do this, we need to:
 
@@ -135,13 +135,6 @@ The total vacation days needs to be determined from the base vacation days and t
 
 1.  Save the completed model.
 
-## Deploying the Decision Service
+## Next steps
 
-With our decision model completed, we can now package our DMN model in a Deployment Unit (KJAR) and deploy it on the Execution Server. To do this:
-
-1.  In the bread-crumb navigation in the upper-left corner, click on `vacation-days-decisions` to go back to the project’s Library View.
-
-2.  Click on the **Deploy** button in the upper-right corner of the screen. This will package our DMN mode in a Deployment Unit (KJAR) and deploy it onto the Execution Server (KIE-Server).
-
-3.  Go to the **Execution Servers** perspective by clicking on "Menu → Deploy → Execution Servers". You will see the **Deployment Unit** deployed on the Execution Server.
-
+We're done. Next, we should deploy the project in KIE Server and test the model using the REST and Java API.

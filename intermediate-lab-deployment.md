@@ -1,4 +1,22 @@
-# Test DMN Solution
+# 5. Vacation Days - Consuming Decisions
+
+The first thing we should do is deploy the project. We'll deploy it in KIE Server using Business Central.
+
+## 5.1. Deploying the Decision Service
+
+With our decision model completed, we can now package our DMN model in a Deployment Unit (KJAR) and deploy it on the Execution Server. To do this:
+
+1.  In the bread-crumb navigation in the upper-left corner, click on `vacation-days-decisions` to go back to the project’s Library View.
+
+2.  Click on the **Deploy** button in the upper-right corner of the screen. This will package our DMN mode in a Deployment Unit (KJAR) and deploy it onto the Execution Server (KIE-Server).
+
+3.  Go to the **Execution Servers** perspective by clicking on "Menu → Deploy → Execution Servers". You will see the **Deployment Unit** deployed on the Execution Server.
+
+## 5.2. Testing DMN Solution
+
+In this section, you will test the DMN solution with Execution Server’s Swagger interface and via Java KIE Client API.
+
+## 5.2.1. Testing the solution via REST API
 
 In this section, you will test the DMN solution with KIE Server’s Swagger interface.
 
@@ -16,7 +34,7 @@ The Swagger interface provides the description and documentation of the Executio
 
 4.  Click on the **Try it out** button.
 
-5.  Set the **containerId** field to `vacation-days-decisions` and set the **Response content type\* to `application/json` and click on **Execute\*\* ![DMN Swagger Get]({% image_path dmn-swagger-get.png %}){:width="600px"}
+5.  Set the **containerId** field to `vacation-days-decisions` and set the **Response content type** to `application/json` and click on **Execute** ![DMN Swagger Get]({% image_path dmn-swagger-get.png %}){:width="600px"}
 
 6.  If requested, provide the username and password of your **Business Central** and **KIE-Server** user.
 
@@ -136,11 +154,13 @@ Next, we will evaluate our model with some input data. We need to provide our mo
     </tbody>
   </table>
 
-## Using the KIE-Server Client
+## 5.2.2. Using the KIE Java Client
 
-Red Hat Decision Manager provides a KIE-Server Client API that allows the user to interact with the KIE-Server from a Java client using a higher level API. It abstracts the data marshalling and unmarshalling and the creation and execution of the RESTful commands from the developer, allowing him/her to focus on developing business logic.
+Red Hat Decision Manager provides a KIE Java Client API that allows the user to interact with the KIE-Server from a Java client using a higher level API. It abstracts the data marshalling and unmarshalling and the creation and execution of the RESTful commands from the developer, allowing him/her to focus on developing business logic.
 
 In this section we will create a simple Java client for our DMN model.
+
+**IMPORTANT:** If your KIE Server is exposed via https you need to configure the ``javax.net.ssl.trustStore and `javax.net.ssl.trustStorePassword` in the Java client code using the Remote Java API. If not, you may get a `rest.NoEndpointFoundException`. For more information check [this solution](https://access.redhat.com/solutions/5424601) Red Hat's knowledge base.
 
 1.  Create a new Maven Java JAR project in your favourite IDE (e.g. IntelliJ, Eclipse, Visual Studio Code).
 
@@ -150,7 +170,7 @@ In this section we will create a simple Java client for our DMN model.
 	   <dependency> 
 	     <groupId>org.kie.server</groupId> 
 	     <artifactId>kie-server-client</artifactId> 
-	     <version>7.18.0.Final</version> 
+	     <version>7.48.0.Final-redhat-00006</version> 
 	     <scope>compile</scope> 
 	   </dependency>
    ~~~
@@ -165,11 +185,9 @@ In this section we will create a simple Java client for our DMN model.
 
    ~~~
      private static final String KIE_SERVER_URL = "http://localhost:8080/kie-server/services/rest/server"; 
-     private static final String CONTAINER_ID = "vacation-days-decisions_1.0.0"; 
+     private static final String CONTAINER_ID = "vacation-days-decisions"; 
      private static final String USERNAME = "pamAdmin"; 
      private static final String PASSWORD = "redhatpam1!"; 
-     private static final String DMN_MODEL_NAMESPACE = "https://github.com/kiegroup/drools/kie-dmn/_D0E62587-C08C-42F3-970B-8595EA48BEEE";
-     private static final String DMN_MODEL_NAME = "vacation-days";
    ~~~
 
 7. KIE-Server client API classes can mostly be retrieved from the `KieServicesFactory` class. We first need to create a `KieServicesConfiguration` instance that will hold our credentials and defines how we want our client to communicate with the server: 
@@ -197,12 +215,10 @@ In this section we will create a simple Java client for our DMN model.
     dmnContext.set("Age", 16); dmnContext.set("Years of Service", 1);
     ~~~
 
-    
-
 11. We now have defined all the required instances needed to send a DMN evaluation request to the server: 
 
     ~~~
-    ServiceResponse<DMNResult> dmnResultResponse = dmnServicesClient.evaluateAll(CONTAINER_ID, DMN_MODEL_NAMESPACE, DMN_MODEL_NAME, dmnContext);
+    ServiceResponse<DMNResult> dmnResultResponse = dmnServicesClient.evaluateAll(CONTAINER_ID, dmnContext);
     ~~~
 
 12. Finally we can retrieve the DMN evaluation result and print it in the console:
@@ -211,9 +227,7 @@ In this section we will create a simple Java client for our DMN model.
     DMNDecisionResult decisionResult = dmnResultResponse.getResult().getDecisionResultByName("Total Vacation Days"); System.out.println("Total vacation days: " + decisionResult.getResult()); 
     ~~~
 
-    
-
 13. Compile your project and run it. Observe the output in the console, which should say: **Total vacation days: 27**
 
 
-The complete project can be found here: <https://github.com/DuncanDoyle/vacation-days-dmn-lab-client>
+The complete project can be found here: <https://github.com/kmacedovarela/dmn-workshop-labs/tree/master/vacation-days-dmn-lab-client>
