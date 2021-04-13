@@ -28,9 +28,9 @@ spec:
           - containerPort: 8080
         env:
         - name: CONTENT_URL_PREFIX
-          value: "https://raw.githubusercontent.com/RedHat-Middleware-Workshops/dmn-workshop/master/"
+          value: "https://raw.githubusercontent.com/kmacedovarela/dmn-workshop/master/"
         - name: WORKSHOPS_URLS
-          value: "https://raw.githubusercontent.com/RedHat-Middleware-Workshops/dmn-workshop/master/_dmn_workshop.yml"
+          value: "https://raw.githubusercontent.com/kmacedovarela/dmn-workshop/master/_dmn_workshop.yml"
         - name: LOG_TO_STDOUT
           value: "true"
 ---
@@ -51,7 +51,7 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-    name: pam-fuse-loan-approval
+    name: wksp-pam-dmn-route
     namespace: bu-wksp-pam-dmn
     labels:
       app: wksp-pam-dmn

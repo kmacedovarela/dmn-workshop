@@ -1,12 +1,20 @@
 # DMN Workshop
 
-Goals
+This is a group of three guided exercises about Decision Model and Notation - DMN. In this workshop you will find three levels of exercise:
 
-* 
+- Getting started - Policy Price use case
+- Intermediate - Vacation Days use case
+- Advanced - Call Center use case
 
 Prerequisite
 
-* 
+* RHPAM or RHDM 7.5+
+
+The output of the guides can be found at: https://github.com/kmacedovarela/dmn-workshop-labs 
+
+Last update: PAM 7.10
+
+
 
 
 ## Instructions

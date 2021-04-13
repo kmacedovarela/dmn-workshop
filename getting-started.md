@@ -34,7 +34,7 @@ The *decision* can also be represented by the following decision requirements di
 
 In this section, you download the GitHub repository to an accessible directory in your file system.
 
-2.  Navigate to the [GitHub repository](https://github.com/gpe-mw-training/bxms_decision_mgmt_foundations_lab).
+2.  Navigate to the [GitHub repository](https://github.com/kmacedovarela/dmn-workshop-labs/tree/master/policy-price).
 
 2.  From the GitHub web page, click **Clone or download** on the right and then select **Download ZIP**:
 
